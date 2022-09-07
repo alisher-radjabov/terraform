@@ -27,6 +27,7 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::245023270685:role/s3-github-actions-role
         aws-region: us-east-1
+        role-session-name: GitHubActions
 
     - name: Copy files to the test website with the AWS CLI
       run: |
