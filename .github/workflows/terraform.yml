@@ -15,8 +15,6 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
     - name: Checkout
@@ -30,5 +28,5 @@ jobs:
 #         role-to-assume: arn:aws:iam::245023270685:role/s3-github-actions-role
 #        aws-region: us-east-1
         
-#     - name: Create buckeet
-#       run: aws s3api create-bucket --bucket ali-cloudops-98098023 --region us-east-1
+    - name: Create buckeet
+      run: aws s3 mb s3://ali-cloudops-0909807 --region us-east-1
