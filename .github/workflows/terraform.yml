@@ -23,10 +23,12 @@ jobs:
       uses: actions/checkout@v3
       
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        role-to-assume: arn:aws:iam::245023270685:role/s3-github-actions-role
-        aws-region: us-east-1
+      # uses: aws-actions/configure-aws-credentials@v1
+      run: |
+          export AWS_ROLE_ARN=arn:aws:iam::245023270685:role/s3-github-actions-role
+#       with:
+#         role-to-assume: arn:aws:iam::245023270685:role/s3-github-actions-role
+#        aws-region: us-east-1
         
     - name: Create buckeet
       run: aws s3api create-bucket --bucket ali-cloudops-98098023 --region us-east-1
