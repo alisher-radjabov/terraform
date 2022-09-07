@@ -8,24 +8,23 @@ on:
   pull_request:
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  deploy:
+    name: Upload to Amazon S3
     runs-on: ubuntu-latest
-    
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
       id-token: write
       contents: read
-    
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-      
-    - name: Configure AWS Credentials
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.MY_AWS_ACCESS_KEY }}
-        aws-secret-access-key: ${{ secrets.MY_AWS_SECRET_KEY }}
+        role-to-assume: arn:aws:iam::245023270685:role/s3-github-actions-role
         aws-region: us-east-1
-        
-    - name: Create buckeet
-      run: aws s3 mb s3://ali-cloudops-0909807 --region us-east-1
+
+    - name: Copy files to the test website with the AWS CLI
+      run: |
+        aws s3 mb s3://my-s3-test-website-bucket-ali-cloudops-898
