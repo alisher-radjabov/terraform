@@ -7,15 +7,15 @@ on:
     - "modules"
   pull_request:
 
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-
+    
+    permissions:
+      id-token: write
+      contents: read
+    
     steps:
     - name: Checkout
       uses: actions/checkout@v3
